@@ -99,11 +99,11 @@ function AddColor() {
     </div>
   );
 }
-function ColorBox() {
-  const style = {
-    height: "25px",
-    width: "250px",
-    background: "pink",
-  };
-  return <div style={style}></div>;
-}
+// function ColorBox() {
+//   const style = {
+//     height: "25px",
+//     width: "250px",
+//     background: "pink",
+//   };
+//   return <div style={style}></div>;
+// }
