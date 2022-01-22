@@ -3,9 +3,10 @@ import "./App.css";
 // import { MovieList } from "./MovieList";
 // import { Counter } from "./components/Counter";
 import { MovieList } from "./components/MovieList";
+// import { AddColor } from "./components/AddColor";
 import { useState } from "react";
 export default function App() {
-  const movies = [
+  const INITIAL_STATE = [
     {
       name: "RRR",
       poster:
@@ -77,33 +78,107 @@ export default function App() {
       trailer: "https://www.youtube.com/embed/NgsQ8mVkN8w",
     },
   ];
+
+  const [movieList, setMovieList] = useState(INITIAL_STATE);
+  const [name, setName] = useState("");
+  const [poster, setPoster] = useState("");
+  const [rating, setRating] = useState("");
+  const [summary, setSummary] = useState("");
+  const [trailer, setTrailer] = useState("");
   return (
-    <div className="App">
-      <MovieList movies={movies} />
-      {/* <Counter /> */}
+    <div>
+      <div className="App">
+        <input
+          className="form-label my-3"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          placeholder="Enter a name"
+        />
+        <input
+          className="form-label my-3"
+          value={poster}
+          onChange={(event) => setPoster(event.target.value)}
+          placeholder="Enter a poster"
+        />
+        <input
+          className="form-label my-3"
+          value={rating}
+          onChange={(event) => setRating(event.target.value)}
+          placeholder="Enter a rating"
+        />
+        <input
+          className="form-label my-3"
+          value={summary}
+          onChange={(event) => setSummary(event.target.value)}
+          placeholder="Enter a summery"
+        />
+        <input
+          className="form-label my-3"
+          value={trailer}
+          onChange={(event) => setTrailer(event.target.value)}
+          placeholder="Enter a trailer"
+        />
+      </div>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          // console.log({
+          //   name: name,
+          //   poster: poster,
+          //   rating: rating,
+          //   summary: summary,
+          //   trailer: trailer,
+          // });
+          const newMovie = {
+            name: name,
+            poster: poster,
+            rating: rating,
+            summary: summary,
+            trailer: trailer,
+          };
+          setMovieList([...movieList, newMovie]);
+        }}
+      >
+        Add Movie
+      </button>
+      <MovieList movies={movieList} />
       <AddColor />
+      {/* <Counter /> */}
     </div>
   );
 }
 function AddColor() {
-  const [color, setColor] = useState("orange");
+  const [color, setColor] = useState("");
   const styles = { backgroundColor: color };
+  // const colorList = ["red", "blue", "yellow"];
+  const [colorList, setColorList] = useState(["red", "blue", "yellow"]);
   return (
-    <div>
+    <div className="mb-3 my-3">
       <input
+        className="form-label my-3"
         value={color}
         onChange={(event) => setColor(event.target.value)}
         style={styles}
         placeholder="Enter a color"
       />
+      <button
+        className="btn btn-primary"
+        onClick={() => setColorList([...colorList, color])}
+      >
+        Add color
+      </button>
+      {colorList.map((clr) => (
+        <ColorBox clr={clr} />
+      ))}
     </div>
   );
 }
-// function ColorBox() {
-//   const style = {
-//     height: "25px",
-//     width: "250px",
-//     background: "pink",
-//   };
-//   return <div style={style}></div>;
-// }
+function ColorBox({ clr }) {
+  const styles = {
+    height: "25px",
+    width: "205px",
+    background: clr,
+    margin: "10px",
+  };
+  return <div className="form-label my-3 mb-3 " style={styles}></div>;
+}
