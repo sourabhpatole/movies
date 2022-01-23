@@ -1,10 +1,24 @@
 import { Movie } from "./Movie";
-export function MovieList({ movies }) {
+export function MovieList({ movies, setMovieList }) {
   return (
     <div className="movie-list">
-      {movies.map(({ name, poster, rating, summary, trailer }) => (
+      {movies.map(({ name, poster, rating, summary, trailer }, index) => (
         <Movie
-          key={name}
+          deleteButton={
+            <button
+              onClick={() => {
+                console.log("delete pressed");
+                const deleteIndex = index;
+                const remainingMovies = movies.filter(
+                  (mv, idx) => deleteIndex !== idx
+                );
+                console.log(movies, remainingMovies);
+                setMovieList(remainingMovies);
+              }}
+            >
+              Delete
+            </button>
+          }
           name={name}
           poster={poster}
           rating={rating}

@@ -141,7 +141,7 @@ export default function App() {
       >
         Add Movie
       </button>
-      <MovieList movies={movieList} />
+      <MovieList movies={movieList} setMovieList={setMovieList} />
       <AddColor />
       {/* <Counter /> */}
     </div>

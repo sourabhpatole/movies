@@ -1,9 +1,16 @@
 import { Counter } from "./Counter";
 import { useState } from "react";
 
-export function Movie({ name, poster, rating, summary, trailer }) {
+export function Movie({
+  name,
+  poster,
+  rating,
+  summary,
+  trailer,
+  deleteButton,
+}) {
   const [show, setShow] = useState(false);
-  const descriptionStyle = { display: show ? "block" : "none" };
+  // const descriptionStyle = { display: show ? "block" : "none" };
   const styles = { color: rating >= 8.6 ? "teal" : "crimson" };
   return (
     <div className="movie-container">
@@ -11,7 +18,6 @@ export function Movie({ name, poster, rating, summary, trailer }) {
       <h3 className="movie-name">{name}</h3>
       <div className="movie-specs">
         <Counter />
-
         <p style={styles} className="movie-rating">
           ⭐{rating}
         </p>
@@ -21,9 +27,9 @@ export function Movie({ name, poster, rating, summary, trailer }) {
       {/* <p style={descriptionStyle} className="movie-summery">
         {summary}
       </p> */}
-
       {/* conditional rendering */}
       {show ? <p className="movie-summery">{summary}</p> : ""}
+      {deleteButton}
       <span> {trailer}</span>
     </div>
   );
