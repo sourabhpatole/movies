@@ -1,8 +1,10 @@
 // import logo from "./logo.svg";
 import "./App.css";
+import React from "react";
 // import { MovieList } from "./MovieList";
 // import { Counter } from "./components/Counter";
 import { MovieList } from "./components/MovieList";
+import { Switch, Route, Link } from "react-router-dom";
 // import { AddColor } from "./components/AddColor";
 import { useState } from "react";
 export default function App() {
@@ -86,72 +88,98 @@ export default function App() {
   const [summary, setSummary] = useState("");
   const [trailer, setTrailer] = useState("");
   return (
-    <div>
-      <div className="App">
-        <input
-          className="form-label mx-3 my-4"
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          placeholder="Enter a name"
-        />
-        <input
-          className="form-label mx-3 my-4"
-          value={poster}
-          onChange={(event) => setPoster(event.target.value)}
-          placeholder="Enter a poster"
-        />
-        <input
-          className="form-label mx-3 my-4"
-          value={rating}
-          onChange={(event) => setRating(event.target.value)}
-          placeholder="Enter a rating"
-        />
-        <input
-          className="form-label mx-3 my-4"
-          value={summary}
-          onChange={(event) => setSummary(event.target.value)}
-          placeholder="Enter a summery"
-        />
-        <input
-          className="form-label mx-3 my-4"
-          value={trailer}
-          onChange={(event) => setTrailer(event.target.value)}
-          placeholder="Enter a trailer"
-        />
-        <button
-          className="btn btn-primary my-3"
-          onClick={() => {
-            // console.log({
-            //   name: name,
-            //   poster: poster,
-            //   rating: rating,
-            //   summary: summary,
-            //   trailer: trailer,
-            // });
-            const newMovie = {
-              name: name,
-              poster: poster,
-              rating: rating,
-              summary: summary,
-              trailer: trailer,
-            };
-            setMovieList([...movieList, newMovie]);
-          }}
-        >
-          Add Movie
-        </button>
-      </div>
-      <MovieList movies={movieList} setMovieList={setMovieList} />
-      <AddColor />
-      {/* <Counter /> */}
+    <div className="App">
+      <nav
+        className="container"
+        style={{ display: "flex", flexDirection: "column" }}
+      >
+        <Link to="/">Home</Link>
+        <Link to="/movies">Movies</Link>
+        <Link to="/addmovies">Add Movies</Link>
+        <Link to="/color-box">Color Game</Link>
+      </nav>
+
+      <Switch>
+        <Route path="/addmovies">
+          <div>
+            <input
+              className="form-label mx-3 my-4"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder="Enter a name"
+            />
+            <input
+              className="form-label mx-3 my-4"
+              value={poster}
+              onChange={(event) => setPoster(event.target.value)}
+              placeholder="Enter a poster"
+            />
+            <input
+              className="form-label mx-3 my-4"
+              value={rating}
+              onChange={(event) => setRating(event.target.value)}
+              placeholder="Enter a rating"
+            />
+            <input
+              className="form-label mx-3 my-4"
+              value={summary}
+              onChange={(event) => setSummary(event.target.value)}
+              placeholder="Enter a summery"
+            />
+            <input
+              className="form-label mx-3 my-4"
+              value={trailer}
+              onChange={(event) => setTrailer(event.target.value)}
+              placeholder="Enter a trailer"
+            />
+            <button
+              className="btn btn-primary my-3"
+              onClick={() => {
+                // console.log({
+                //   name: name,
+                //   poster: poster,
+                //   rating: rating,
+                //   summary: summary,
+                //   trailer: trailer,
+                // });
+                const newMovie = {
+                  name: name,
+                  poster: poster,
+                  rating: rating,
+                  summary: summary,
+                  trailer: trailer,
+                };
+                setMovieList([...movieList, newMovie]);
+              }}
+            >
+              Add Movie
+            </button>
+          </div>
+        </Route>
+        <Route path="/movies">
+          <MovieList movies={movieList} setMovieList={setMovieList} />
+        </Route>
+        {/* <Counter /> */}
+        <Route path="/color-box">
+          <AddColor />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
     </div>
   );
 }
+function Home() {
+  return <h1>Welcome to Home</h1>;
+}
+
 function AddColor() {
   const [color, setColor] = useState("");
   const styles = { backgroundColor: color };
   // const colorList = ["red", "blue", "yellow"];
   const [colorList, setColorList] = useState(["red", "blue", "yellow"]);
+
   return (
     <div className="mb-3 my-3">
       <input
