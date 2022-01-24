@@ -7,6 +7,9 @@ import { MovieList } from "./components/MovieList";
 import { Switch, Route, Link } from "react-router-dom";
 // import { AddColor } from "./components/AddColor";
 import { useState } from "react";
+import { Addmovie } from "./components/Addmovie";
+import { AddColor } from "./components/AddColor";
+import { Home } from "./components/Home";
 export default function App() {
   const INITIAL_STATE = [
     {
@@ -80,13 +83,7 @@ export default function App() {
       trailer: "https://www.youtube.com/embed/NgsQ8mVkN8w",
     },
   ];
-
   const [movieList, setMovieList] = useState(INITIAL_STATE);
-  const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [rating, setRating] = useState("");
-  const [summary, setSummary] = useState("");
-  const [trailer, setTrailer] = useState("");
   return (
     <div className="App">
       <nav
@@ -95,66 +92,13 @@ export default function App() {
       >
         <Link to="/">Home</Link>
         <Link to="/movies">Movies</Link>
-        <Link to="/addmovies">Add Movies</Link>
+        <Link to="/movies/add">Add Movies</Link>
         <Link to="/color-box">Color Game</Link>
       </nav>
 
       <Switch>
-        <Route path="/addmovies">
-          <div>
-            <input
-              className="form-label mx-3 my-4"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              placeholder="Enter a name"
-            />
-            <input
-              className="form-label mx-3 my-4"
-              value={poster}
-              onChange={(event) => setPoster(event.target.value)}
-              placeholder="Enter a poster"
-            />
-            <input
-              className="form-label mx-3 my-4"
-              value={rating}
-              onChange={(event) => setRating(event.target.value)}
-              placeholder="Enter a rating"
-            />
-            <input
-              className="form-label mx-3 my-4"
-              value={summary}
-              onChange={(event) => setSummary(event.target.value)}
-              placeholder="Enter a summery"
-            />
-            <input
-              className="form-label mx-3 my-4"
-              value={trailer}
-              onChange={(event) => setTrailer(event.target.value)}
-              placeholder="Enter a trailer"
-            />
-            <button
-              className="btn btn-primary my-3"
-              onClick={() => {
-                // console.log({
-                //   name: name,
-                //   poster: poster,
-                //   rating: rating,
-                //   summary: summary,
-                //   trailer: trailer,
-                // });
-                const newMovie = {
-                  name: name,
-                  poster: poster,
-                  rating: rating,
-                  summary: summary,
-                  trailer: trailer,
-                };
-                setMovieList([...movieList, newMovie]);
-              }}
-            >
-              Add Movie
-            </button>
-          </div>
+        <Route path="/movies/add">
+          <Addmovie movies={movieList} setMovieList={setMovieList} />
         </Route>
         <Route path="/movies">
           <MovieList movies={movieList} setMovieList={setMovieList} />
@@ -169,44 +113,4 @@ export default function App() {
       </Switch>
     </div>
   );
-}
-function Home() {
-  return <h1>Welcome to Home</h1>;
-}
-
-function AddColor() {
-  const [color, setColor] = useState("");
-  const styles = { backgroundColor: color };
-  // const colorList = ["red", "blue", "yellow"];
-  const [colorList, setColorList] = useState(["red", "blue", "yellow"]);
-
-  return (
-    <div className="mb-3 my-3">
-      <input
-        className="form-label mx-3 my-4"
-        value={color}
-        onChange={(event) => setColor(event.target.value)}
-        style={styles}
-        placeholder="Enter a color"
-      />
-      <button
-        className="btn btn-primary"
-        onClick={() => setColorList([...colorList, color])}
-      >
-        Add color
-      </button>
-      {colorList.map((clr) => (
-        <ColorBox clr={clr} />
-      ))}
-    </div>
-  );
-}
-function ColorBox({ clr }) {
-  const styles = {
-    height: "25px",
-    width: "205px",
-    background: clr,
-    margin: "10px",
-  };
-  return <div className="form-label mx-3 my-4 mb-3 " style={styles}></div>;
 }

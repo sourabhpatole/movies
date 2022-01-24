@@ -13,22 +13,24 @@ export function Movie({
   // const descriptionStyle = { display: show ? "block" : "none" };
   const styles = { color: rating >= 8.6 ? "teal" : "crimson" };
   return (
-    <div className="movie-container">
+    <div className="container ">
       <img src={poster} alt={name} className="movie-poster" />
       <h3 className="movie-name">{name}</h3>
-      <div className="movie-specs">
+      <div className="movie-specs my-3">
         <Counter />
         <p style={styles} className="movie-rating">
           ⭐{rating}
         </p>
       </div>
-      <button onClick={() => setShow(!show)}>Toggle Description</button>
+      <button className="btn btn-primary mx-3" onClick={() => setShow(!show)}>
+        Toggle Description
+      </button>
       {/* conditional styling */}
       {/* <p style={descriptionStyle} className="movie-summery">
         {summary}
       </p> */}
       {/* conditional rendering */}
-      {show ? <p className="movie-summery">{summary}</p> : ""}
+      {show ? <p className="movie-summery ">{summary}</p> : ""}
       {deleteButton}
       <span> {trailer}</span>
     </div>

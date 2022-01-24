@@ -6,6 +6,7 @@ export function MovieList({ movies, setMovieList }) {
         <Movie
           deleteButton={
             <button
+              className="btn btn-danger"
               onClick={() => {
                 console.log("delete pressed");
                 const deleteIndex = index;
