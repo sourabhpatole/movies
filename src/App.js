@@ -1,19 +1,17 @@
 // import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
-import Button from "@mui/material/Button";
-import { useHistory } from "react-router-dom";
 // import { MovieList } from "./MovieList";
 // import { Counter } from "./components/Counter";
 import { MovieList } from "./components/MovieList";
-import { Switch, Redirect, Route, Link, useParams } from "react-router-dom";
+import { Switch, Redirect, Route, Link } from "react-router-dom";
 // import { AddColor } from "./components/AddColor";
 import { useState } from "react";
 import { Addmovie } from "./components/Addmovie";
 import { AddColor } from "./components/AddColor";
 import { Home } from "./components/Home";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { NotFound } from "./components/NotFound";
+import { MovieDetail } from "./components/MovieDetail";
 export default function App() {
   const INITIAL_STATE = [
     {
@@ -125,61 +123,6 @@ export default function App() {
           <NotFound />
         </Route>
       </Switch>
-    </div>
-  );
-}
-
-function MovieDetail({ movies }) {
-  console.log(movies);
-  const { id } = useParams();
-  const history = useHistory();
-  const movie = movies[id];
-  console.log(movie);
-  return (
-    <div className="container">
-      <h3 className="movie-name">{movie.name}</h3>
-      <div>
-        <iframe
-          width="876"
-          height="364"
-          src={movie.trailer}
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
-      <div className="container">⭐{movie.rating}</div>
-
-      <p>{movie.summary}</p>
-      <Button
-        variant="outlined"
-        onClick={() => history.goBack()}
-        startIcon={<ArrowBackIcon />}
-      >
-        Back
-      </Button>
-      <Button
-        variant="outlined"
-        onClick={() => history.goForward()}
-        startIcon={<ArrowForwardIcon />}
-      >
-        Forward
-      </Button>
-    </div>
-    // {/* <h1>helo </h1> */}
-  );
-}
-
-function NotFound() {
-  return (
-    <div className="container">
-      <h1>404</h1>
-      <img
-        className="image-responsive"
-        src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif"
-        alt="404"
-      />
     </div>
   );
 }
