@@ -20,6 +20,7 @@ export function MovieList({ movies, setMovieList }) {
               Delete
             </button>
           }
+          id={index}
           name={name}
           poster={poster}
           rating={rating}
