@@ -5,6 +5,7 @@ import React from "react";
 // import { Counter } from "./components/Counter";
 import { MovieList } from "./components/MovieList";
 import { Switch, Redirect, Route, Link } from "react-router-dom";
+import AppBar from "@mui/material/AppBar";
 // import { AddColor } from "./components/AddColor";
 import { useState } from "react";
 import { Addmovie } from "./components/Addmovie";
@@ -12,6 +13,10 @@ import { AddColor } from "./components/AddColor";
 import { Home } from "./components/Home";
 import { NotFound } from "./components/NotFound";
 import { MovieDetail } from "./components/MovieDetail";
+import { useHistory } from "react-router-dom";
+
+import Toolbar from "@mui/material/Toolbar";
+import Button from "@mui/material/Button";
 export default function App() {
   const INITIAL_STATE = [
     {
@@ -86,9 +91,30 @@ export default function App() {
     },
   ];
   const [movieList, setMovieList] = useState(INITIAL_STATE);
+  const history = useHistory();
   return (
     <div className="App">
-      <nav
+      <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit" onClick={() => history.push("/home")}>
+            Home
+          </Button>
+          <Button color="inherit" onClick={() => history.push("/films")}>
+            Films
+          </Button>
+          <Button color="inherit" onClick={() => history.push("/movies")}>
+            Movies
+          </Button>
+          <Button color="inherit" onClick={() => history.push("/movies/add")}>
+            Add Movies
+          </Button>
+          <Button color="inherit" onClick={() => history.push("/color-box")}>
+            Color Game
+          </Button>
+        </Toolbar>
+      </AppBar>
+
+      {/* <nav
         className="container"
         style={{ display: "flex", flexDirection: "column" }}
       >
@@ -97,7 +123,7 @@ export default function App() {
         <Link to="/movies">Movies</Link>
         <Link to="/movies/add">Add Movies</Link>
         <Link to="/color-box">Color Game</Link>
-      </nav>
+      </nav> */}
 
       <Switch>
         <Route path="/movies/add">
