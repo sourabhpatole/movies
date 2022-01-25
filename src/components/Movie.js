@@ -13,10 +13,10 @@ export function Movie({
   // const descriptionStyle = { display: show ? "block" : "none" };
   const styles = { color: rating >= 8.6 ? "teal" : "crimson" };
   return (
-    <div className="container ">
+    <div className="container">
       <img src={poster} alt={name} className="movie-poster" />
       <h3 className="movie-name">{name}</h3>
-      <div className="movie-specs my-3">
+      <div className="container">
         <Counter />
         <p style={styles} className="movie-rating">
           ⭐{rating}

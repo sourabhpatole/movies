@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 export function Addmovie({ movieList, setMovieList }) {
   const [name, setName] = useState("");
@@ -7,6 +8,8 @@ export function Addmovie({ movieList, setMovieList }) {
   const [rating, setRating] = useState("");
   const [summary, setSummary] = useState("");
   const [trailer, setTrailer] = useState("");
+
+  const history = useHistory();
   return (
     <div>
       <input
@@ -57,6 +60,7 @@ export function Addmovie({ movieList, setMovieList }) {
             trailer: trailer,
           };
           setMovieList([...movieList, newMovie]);
+          history.push("/movies");
         }}
       >
         Add Movie

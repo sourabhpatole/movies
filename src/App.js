@@ -4,7 +4,7 @@ import React from "react";
 // import { MovieList } from "./MovieList";
 // import { Counter } from "./components/Counter";
 import { MovieList } from "./components/MovieList";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Redirect, Route, Link } from "react-router-dom";
 // import { AddColor } from "./components/AddColor";
 import { useState } from "react";
 import { Addmovie } from "./components/Addmovie";
@@ -90,7 +90,8 @@ export default function App() {
         className="container"
         style={{ display: "flex", flexDirection: "column" }}
       >
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
+        <Link to="/films">Films</Link>
         <Link to="/movies">Movies</Link>
         <Link to="/movies/add">Add Movies</Link>
         <Link to="/color-box">Color Game</Link>
@@ -98,19 +99,37 @@ export default function App() {
 
       <Switch>
         <Route path="/movies/add">
-          <Addmovie movies={movieList} setMovieList={setMovieList} />
+          <Addmovie movieList={movieList} setMovieList={setMovieList} />
         </Route>
         <Route path="/movies">
           <MovieList movies={movieList} setMovieList={setMovieList} />
+        </Route>
+        <Route path="/films">
+          <Redirect to="/movies" />
         </Route>
         {/* <Counter /> */}
         <Route path="/color-box">
           <AddColor />
         </Route>
-        <Route path="/">
+        <Route path="/home">
           <Home />
         </Route>
+        <Route path="**">
+          <NotFound />
+        </Route>
       </Switch>
+    </div>
+  );
+}
+function NotFound() {
+  return (
+    <div className="container">
+      <h1>404</h1>
+      <img
+        className="image-responsive"
+        src="https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif"
+        alt="404"
+      />
     </div>
   );
 }
