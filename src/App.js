@@ -1,12 +1,8 @@
-// import logo from "./logo.svg";
 import "./App.css";
 import React from "react";
-// import { MovieList } from "./MovieList";
-// import { Counter } from "./components/Counter";
 import { MovieList } from "./components/MovieList";
-import { Switch, Redirect, Route, Link } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
-// import { AddColor } from "./components/AddColor";
 import { useState } from "react";
 import { Addmovie } from "./components/Addmovie";
 import { AddColor } from "./components/AddColor";
@@ -17,6 +13,7 @@ import { useHistory } from "react-router-dom";
 
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
+import { Game } from "./components/Game";
 export default function App() {
   const INITIAL_STATE = [
     {
@@ -111,9 +108,11 @@ export default function App() {
           <Button color="inherit" onClick={() => history.push("/color-box")}>
             Color Game
           </Button>
+          <Button color="inherit" onClick={() => history.push("/game")}>
+            Game
+          </Button>
         </Toolbar>
       </AppBar>
-
       {/* <nav
         className="container"
         style={{ display: "flex", flexDirection: "column" }}
@@ -124,31 +123,35 @@ export default function App() {
         <Link to="/movies/add">Add Movies</Link>
         <Link to="/color-box">Color Game</Link>
       </nav> */}
-
-      <Switch>
-        <Route path="/movies/add">
-          <Addmovie movieList={movieList} setMovieList={setMovieList} />
-        </Route>
-        <Route path="/movies/:id">
-          <MovieDetail movies={movieList} />
-        </Route>
-        <Route path="/movies">
-          <MovieList movies={movieList} setMovieList={setMovieList} />
-        </Route>
-        <Route path="/films">
-          <Redirect to="/movies" />
-        </Route>
-        {/* <Counter /> */}
-        <Route path="/color-box">
-          <AddColor />
-        </Route>
-        <Route path="/home">
-          <Home />
-        </Route>
-        <Route path="**">
-          <NotFound />
-        </Route>
-      </Switch>
+      <section className="route-container">
+        <Switch>
+          <Route path="/movies/add">
+            <Addmovie movieList={movieList} setMovieList={setMovieList} />
+          </Route>
+          <Route path="/movies/:id">
+            <MovieDetail movies={movieList} />
+          </Route>
+          <Route path="/movies">
+            <MovieList movies={movieList} setMovieList={setMovieList} />
+          </Route>
+          <Route path="/films">
+            <Redirect to="/movies" />
+          </Route>
+          {/* <Counter /> */}
+          <Route path="/color-box">
+            <AddColor />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/game">
+            <Game />
+          </Route>
+          <Route path="**">
+            <NotFound />
+          </Route>
+        </Switch>
+      </section>
     </div>
   );
 }
