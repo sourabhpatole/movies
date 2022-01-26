@@ -54,8 +54,8 @@ export function Game() {
   const winner = decidewinner(boarda);
   return (
     <div className="container">
-      <button onClick={() => setIsXtrun === isXtrun}>X select</button>
-      <button onClick={() => setIsXtrun === false}>O select</button>
+      <button onClick={() => isXtrun}>X select</button>
+      <button onClick={() => !isXtrun}>O select</button>
       <button>{isXtrun ? "X turn" : "O turn"} </button>
       <div className="board container my-2">
         {boarda.map((val, index) => (
