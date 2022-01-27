@@ -22,7 +22,7 @@ export function MovieList() {
     <div className="movie-list">
       {movies.map(({ name, poster, rating, summary, trailer, id }, index) => (
         <Movie
-          key={index}
+          key={id}
           deleteButton={
             <button
               className="btn btn-danger"

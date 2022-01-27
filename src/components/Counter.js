@@ -1,5 +1,4 @@
 import { useState } from "react";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 export function Counter() {
   // const like = 5;
   const [like, setLike] = useState(0);
