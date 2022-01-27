@@ -31,13 +31,6 @@ export default function App() {
 
   const [movieList, setMovieList] = useState([]);
   const history = useHistory();
-  useEffect(() => {
-    fetch("https://61f2943a2219930017f50735.mockapi.io/movies", {
-      method: "GET",
-    })
-      .then((data) => data.json())
-      .then((mvs) => setMovieList(mvs));
-  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -100,7 +93,7 @@ export default function App() {
                 <MovieDetail movies={movieList} />
               </Route>
               <Route path="/movies">
-                <MovieList movies={movieList} setMovieList={setMovieList} />
+                <MovieList />
               </Route>
               <Route path="/films">
                 <Redirect to="/movies" />

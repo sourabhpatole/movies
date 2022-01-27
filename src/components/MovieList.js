@@ -1,11 +1,23 @@
 import { Movie } from "./Movie";
-export function MovieList({ movies, setMovieList }) {
+import { useEffect, useState } from "react";
+export function MovieList() {
+  const [movies, setMovieList] = useState([]);
+  const getmovies = () => {
+    fetch("https://61f2943a2219930017f50735.mockapi.io/movies", {
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((mvs) => setMovieList(mvs));
+  };
   const deleteMovie = (id) => {
     fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${id}`, {
       method: "DELETE",
-    }).then((data) => data.json());
-    // .then((mvs) => setMovieList(mvs));
+    })
+      .then((data) => data.json())
+      .then(() => getmovies());
   };
+
+  useEffect(getmovies, []);
   return (
     <div className="movie-list">
       {movies.map(({ name, poster, rating, summary, trailer, id }, index) => (
