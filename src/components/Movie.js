@@ -46,6 +46,7 @@ export function Movie({ name, poster, rating, summary, deleteButton, id }) {
       </button>
       <ArrowDropDownIcon
         fontSize="large"
+        color="white"
         onClick={() => setShow(!show)}
       ></ArrowDropDownIcon>
       {/* conditional styling */}
@@ -53,7 +54,7 @@ export function Movie({ name, poster, rating, summary, deleteButton, id }) {
         {summary}
       </p> */}
       {/* conditional rendering */}
-      {show ? <p className="movie-summery ">{summary}</p> : ""}
+      {show ? <p className="movie-summery">{summary}</p> : ""}
       {deleteButton}
     </div>
   );

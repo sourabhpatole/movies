@@ -81,7 +81,7 @@ body {
   cursor: pointer;
 }
 .game-box:hover {
-  background-color: #8f8383f3;
+  background-color: #1d1c1cf3;
 }
 .board {
   display: grid;
@@ -91,6 +91,6 @@ body {
   gap: 1px;
 }
 .card-container {
-  background-color: #e8e9eb;
+  background-color: #45454b;
   border-radius: 23px;
 }
