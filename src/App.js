@@ -10,11 +10,22 @@ import { Home } from "./components/Home";
 import { NotFound } from "./components/NotFound";
 import { MovieDetail } from "./components/MovieDetail";
 import { useHistory } from "react-router-dom";
-
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
+import { Paper } from "@mui/material";
 import { Game } from "./components/Game";
+
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
 export default function App() {
+  const colorMode = React.useContext(ColorModeContext);
+  const [mode, setMode] = useState("dark");
+  const theme = createTheme({
+    palette: {
+      mode: mode,
+    },
+  });
   const INITIAL_STATE = [
     {
       name: "RRR",
@@ -90,30 +101,44 @@ export default function App() {
   const [movieList, setMovieList] = useState(INITIAL_STATE);
   const history = useHistory();
   return (
-    <div className="App">
-      <AppBar position="static">
-        <Toolbar>
-          <Button color="inherit" onClick={() => history.push("/home")}>
-            Home
-          </Button>
-          <Button color="inherit" onClick={() => history.push("/films")}>
-            Films
-          </Button>
-          <Button color="inherit" onClick={() => history.push("/movies")}>
-            Movies
-          </Button>
-          <Button color="inherit" onClick={() => history.push("/movies/add")}>
-            Add Movies
-          </Button>
-          <Button color="inherit" onClick={() => history.push("/color-box")}>
-            Color Game
-          </Button>
-          <Button color="inherit" onClick={() => history.push("/game")}>
-            Game
-          </Button>
-        </Toolbar>
-      </AppBar>
-      {/* <nav
+    <ThemeProvider theme={theme}>
+      <Paper sx={{ minHeight: "100vh" }} elevation={30}>
+        <div className="App">
+          <AppBar position="static">
+            <Toolbar>
+              <Button color="inherit" onClick={() => history.push("/home")}>
+                Home
+              </Button>
+              <Button color="inherit" onClick={() => history.push("/films")}>
+                Films
+              </Button>
+              <Button color="inherit" onClick={() => history.push("/movies")}>
+                Movies
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => history.push("/movies/add")}
+              >
+                Add Movies
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => history.push("/color-box")}
+              >
+                Color Game
+              </Button>
+              <Button color="inherit" onClick={() => history.push("/game")}>
+                Game
+              </Button>
+              <Button
+                color="inherit"
+                onClick={() => setMode(mode === "light" ? "dark" : "light")}
+              >
+                {mode === "light" ? "dark" : "light"} mode
+              </Button>
+            </Toolbar>
+          </AppBar>
+          {/* <nav
         className="container"
         style={{ display: "flex", flexDirection: "column" }}
       >
@@ -123,35 +148,37 @@ export default function App() {
         <Link to="/movies/add">Add Movies</Link>
         <Link to="/color-box">Color Game</Link>
       </nav> */}
-      <section className="route-container">
-        <Switch>
-          <Route path="/movies/add">
-            <Addmovie movieList={movieList} setMovieList={setMovieList} />
-          </Route>
-          <Route path="/movies/:id">
-            <MovieDetail movies={movieList} />
-          </Route>
-          <Route path="/movies">
-            <MovieList movies={movieList} setMovieList={setMovieList} />
-          </Route>
-          <Route path="/films">
-            <Redirect to="/movies" />
-          </Route>
-          {/* <Counter /> */}
-          <Route path="/color-box">
-            <AddColor />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/game">
-            <Game />
-          </Route>
-          <Route path="**">
-            <NotFound />
-          </Route>
-        </Switch>
-      </section>
-    </div>
+          <section className="route-container">
+            <Switch>
+              <Route path="/movies/add">
+                <Addmovie movieList={movieList} setMovieList={setMovieList} />
+              </Route>
+              <Route path="/movies/:id">
+                <MovieDetail movies={movieList} />
+              </Route>
+              <Route path="/movies">
+                <MovieList movies={movieList} setMovieList={setMovieList} />
+              </Route>
+              <Route path="/films">
+                <Redirect to="/movies" />
+              </Route>
+              {/* <Counter /> */}
+              <Route path="/color-box">
+                <AddColor />
+              </Route>
+              <Route path="/home">
+                <Home />
+              </Route>
+              <Route path="/game">
+                <Game />
+              </Route>
+              <Route path="**">
+                <NotFound />
+              </Route>
+            </Switch>
+          </section>
+        </div>
+      </Paper>
+    </ThemeProvider>
   );
 }

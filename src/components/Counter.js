@@ -1,12 +1,13 @@
 import { useState } from "react";
-
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 export function Counter() {
   // const like = 5;
   const [like, setLike] = useState(0);
   const [dlike, setdLike] = useState(0);
   return (
-    <div className="counter-container">
+    <div className="container">
       <button
+        className="btn btn-primary mx-1"
         onClick={() => {
           setLike(like + 1);
         }}
@@ -15,6 +16,7 @@ export function Counter() {
       </button>
 
       <button
+        className="btn btn-primary mx-1"
         onClick={() => {
           setdLike(dlike - 1);
         }}

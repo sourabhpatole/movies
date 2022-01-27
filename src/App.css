@@ -36,11 +36,10 @@
     transform: rotate(360deg);
   }
 }
-.movie-poster {
-  height: 640px;
-  width: 340px;
-  object-fit: cover;
-  border-radius: 0.9rem;
+.card-img-top {
+  height: 540px;
+  display: flex;
+  border-radius: 1rem;
 }
 .movie-name {
   font-size: 24px;
@@ -82,7 +81,7 @@ body {
   cursor: pointer;
 }
 .game-box:hover {
-  background-color: rgb(236, 223, 223);
+  background-color: #8f8383f3;
 }
 .board {
   display: grid;
@@ -90,4 +89,8 @@ body {
   width: min-content;
 
   gap: 1px;
+}
+.card-container {
+  background-color: #e8e9eb;
+  border-radius: 23px;
 }
