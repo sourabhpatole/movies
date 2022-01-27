@@ -15,6 +15,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import { Paper } from "@mui/material";
 import { Game } from "./components/Game";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -131,6 +133,10 @@ export default function App() {
                 Game
               </Button>
               <Button
+                sx={{ marginLeft: "auto" }}
+                startIcon={
+                  mode === "light" ? <Brightness7Icon /> : <Brightness4Icon />
+                }
                 color="inherit"
                 onClick={() => setMode(mode === "light" ? "dark" : "light")}
               >
