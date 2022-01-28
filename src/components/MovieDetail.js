@@ -3,21 +3,29 @@ import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useEffect, useState } from "react";
 
-export function MovieDetail({ movies }) {
-  console.log(movies);
+export function MovieDetail() {
   const { id } = useParams();
+  const [movie, setMovieList] = useState([]);
+  const getmovie = () => {
+    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${id}`, {
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((mvs) => setMovieList(mvs));
+  };
+  useEffect(getmovie, [id]);
   const history = useHistory();
-  const movie = movies[id];
-  console.log(movie);
+  // const movie = movies[id];
+  // console.log(movie);
   return (
     <div className="container">
-      <h3 className="movie-name">{movie.name}</h3>
-      <div>
+      <h3 className="movie-name ">{movie.name}</h3>
+      <div className="container my-2">
         <iframe
-          width="876"
-          height="364"
+          width="100%"
+          height="564"
           src={movie.trailer}
           title="YouTube video player"
           frameborder="0"
@@ -25,7 +33,7 @@ export function MovieDetail({ movies }) {
           allowfullscreen
         ></iframe>
       </div>
-      <div className="container">⭐{movie.rating}</div>
+      <div className="container">{movie.rating}</div>
 
       <p>{movie.summary}</p>
       <Button
@@ -34,13 +42,6 @@ export function MovieDetail({ movies }) {
         startIcon={<ArrowBackIcon />}
       >
         Back
-      </Button>
-      <Button
-        variant="outlined"
-        onClick={() => history.goForward()}
-        startIcon={<ArrowForwardIcon />}
-      >
-        Forward
       </Button>
     </div>
     // {/* <h1>helo </h1> */}

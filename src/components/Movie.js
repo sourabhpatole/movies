@@ -4,8 +4,17 @@ import { useHistory } from "react-router-dom";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
-
-export function Movie({ name, poster, rating, summary, deleteButton, id }) {
+import IconButton from "@mui/material/IconButton";
+import InfoIcon from "@mui/icons-material/Info";
+export function Movie({
+  name,
+  poster,
+  rating,
+  summary,
+  deleteButton,
+  id,
+  editButton,
+}) {
   const [show, setShow] = useState(false);
 
   const history = useHistory();
@@ -38,17 +47,19 @@ export function Movie({ name, poster, rating, summary, deleteButton, id }) {
         </Box>
       </div>
 
-      <button
-        className="btn btn-primary mx-3"
+      <IconButton
+        aria-label="delete"
+        size="medium"
         onClick={() => history.push(`/movies/${id}`)}
       >
-        info
-      </button>
+        <InfoIcon />
+      </IconButton>
       <ArrowDropDownIcon
         fontSize="large"
         color="white"
         onClick={() => setShow(!show)}
       ></ArrowDropDownIcon>
+
       {/* conditional styling */}
       {/* <p style={descriptionStyle} className="movie-summery">
         {summary}
@@ -56,6 +67,7 @@ export function Movie({ name, poster, rating, summary, deleteButton, id }) {
       {/* conditional rendering */}
       {show ? <p className="movie-summery">{summary}</p> : ""}
       {deleteButton}
+      {editButton}
     </div>
   );
 }

@@ -17,6 +17,7 @@ import { Paper } from "@mui/material";
 import { Game } from "./components/Game";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { EditMovies } from "./components/EditMovies";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -87,10 +88,13 @@ export default function App() {
           <section className="route-container">
             <Switch>
               <Route path="/movies/add">
-                <Addmovie movieList={movieList} setMovieList={setMovieList} />
+                <Addmovie />
+              </Route>
+              <Route path="/movies/edit/:id">
+                <EditMovies />
               </Route>
               <Route path="/movies/:id">
-                <MovieDetail movies={movieList} />
+                <MovieDetail />
               </Route>
               <Route path="/movies">
                 <MovieList />

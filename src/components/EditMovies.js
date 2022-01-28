@@ -1,16 +1,29 @@
 import React from "react";
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+export function EditMovies() {
+  const { id } = useParams();
+  const [movie, setMovieList] = useState(null);
+  const getmovie = () => {
+    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${id}`, {
+      method: "GET",
+    })
+      .then((data) => data.json())
+      .then((mvs) => setMovieList(mvs));
+  };
+  useEffect(getmovie, [id]);
+  console.log(movie);
+  return movie ? <UpadateMovies movie={movie} /> : "";
+}
+function UpadateMovies({ movie }) {
+  const [name, setName] = useState(movie.name);
+  const [poster, setPoster] = useState(movie.poster);
+  const [rating, setRating] = useState(movie.rating);
+  const [summary, setSummary] = useState(movie.summary);
+  const [trailer, setTrailer] = useState(movie.trailer);
 
-export function Addmovie({ movieList, setMovieList }) {
-  const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [rating, setRating] = useState("");
-  const [summary, setSummary] = useState("");
-  const [trailer, setTrailer] = useState("");
-
-  const admovie = () => {
-    const newMovie = {
+  const editMovie = () => {
+    const updatedMovie = {
       name: name,
       poster: poster,
       rating: rating,
@@ -19,9 +32,9 @@ export function Addmovie({ movieList, setMovieList }) {
     };
     // setMovieList([...movieList, newMovie]);
 
-    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies`, {
-      method: "POST",
-      body: JSON.stringify(newMovie),
+    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${movie.id}`, {
+      method: "PUT",
+      body: JSON.stringify(updatedMovie),
       headers: {
         "Content-Type": "application/json",
       },
@@ -63,8 +76,8 @@ export function Addmovie({ movieList, setMovieList }) {
         onChange={(event) => setTrailer(event.target.value)}
         placeholder="Enter a trailer"
       />
-      <button className="btn btn-primary my-3" onClick={admovie}>
-        Add Movie
+      <button className="btn btn-warning my-3" onClick={editMovie}>
+        Save Movie
       </button>
     </div>
   );

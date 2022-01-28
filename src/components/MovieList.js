@@ -1,5 +1,9 @@
 import { Movie } from "./Movie";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
 export function MovieList() {
   const [movies, setMovieList] = useState([]);
   const getmovies = () => {
@@ -9,6 +13,7 @@ export function MovieList() {
       .then((data) => data.json())
       .then((mvs) => setMovieList(mvs));
   };
+  useEffect(getmovies, []);
   const deleteMovie = (id) => {
     fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${id}`, {
       method: "DELETE",
@@ -16,31 +21,32 @@ export function MovieList() {
       .then((data) => data.json())
       .then(() => getmovies());
   };
+  const history = useHistory();
 
-  useEffect(getmovies, []);
   return (
     <div className="movie-list">
       {movies.map(({ name, poster, rating, summary, trailer, id }, index) => (
         <Movie
           key={id}
           deleteButton={
-            <button
-              className="btn btn-danger"
-              // onClick={() => {
-              //   console.log("delete pressed");
-              //   const deleteIndex = index;
-              //   const remainingMovies = movies.filter(
-              //     (mv, idx) => deleteIndex !== idx
-              //   );
-              //   console.log(movies, remainingMovies);
-              //   setMovieList(remainingMovies);
-              // }}
+            <IconButton
+              aria-label="delete"
+              size="medium"
               onClick={() => deleteMovie(id)}
             >
-              Delete
-            </button>
+              <DeleteIcon />
+            </IconButton>
           }
-          id={index}
+          editButton={
+            <IconButton
+              aria-label="delete"
+              size="medium"
+              onClick={() => history.push(`/movies/edit/${id}`)}
+            >
+              <EditIcon />
+            </IconButton>
+          }
+          id={id}
           name={name}
           poster={poster}
           rating={rating}
