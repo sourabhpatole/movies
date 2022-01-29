@@ -18,6 +18,7 @@ import { Game } from "./components/Game";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { EditMovies } from "./components/EditMovies";
+import { BasicForm } from "./components/BasicForm";
 
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
@@ -92,6 +93,9 @@ export default function App() {
               </Route>
               <Route path="/movies/edit/:id">
                 <EditMovies />
+              </Route>
+              <Route path="/form">
+                <BasicForm />
               </Route>
               <Route path="/movies/:id">
                 <MovieDetail />
