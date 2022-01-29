@@ -3,7 +3,7 @@ import React from "react";
 import { MovieList } from "./components/MovieList";
 import { Switch, Redirect, Route } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Addmovie } from "./components/Addmovie";
 import { AddColor } from "./components/AddColor";
 import { Home } from "./components/Home";
@@ -20,10 +20,10 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { EditMovies } from "./components/EditMovies";
 import { BasicForm } from "./components/BasicForm";
 
-const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+// const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 export default function App() {
-  const colorMode = React.useContext(ColorModeContext);
+  // const colorMode = React.useContext(ColorModeContext);
   const [mode, setMode] = useState("dark");
   const theme = createTheme({
     palette: {
@@ -31,7 +31,7 @@ export default function App() {
     },
   });
 
-  const [movieList, setMovieList] = useState([]);
+  // const [movieList, setMovieList] = useState([]);
   const history = useHistory();
 
   return (
