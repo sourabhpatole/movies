@@ -64,6 +64,7 @@ export function Addmovie() {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        error
         className="form-label mx-3 my-4"
         id="name"
         name="name"
