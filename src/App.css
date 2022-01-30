@@ -85,8 +85,8 @@ body {
   background-color: #1d1c1cf3;
 }
 .board {
-  display: flex;
-  grid-template-columns: (3, 1fr);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   width: min-content;
 
   gap: 1px;
