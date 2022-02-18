@@ -1,11 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import {API} from "../global";
+
 export function EditMovies() {
   const { id } = useParams();
   const [movie, setMovieList] = useState(null);
   const getmovie = () => {
-    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${id}`, {
+    fetch(`${API}/movies/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())
@@ -32,7 +34,7 @@ function UpadateMovies({ movie }) {
     };
     // setMovieList([...movieList, newMovie]);
 
-    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${movie.id}`, {
+    fetch(`${API}/movies/${movie.id}`, {
       method: "PUT",
       body: JSON.stringify(updatedMovie),
       headers: {

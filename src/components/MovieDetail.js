@@ -4,12 +4,13 @@ import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useEffect, useState } from "react";
+import { API } from "../global";
 
 export function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovieList] = useState([]);
   const getmovie = () => {
-    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${id}`, {
+    fetch(`${API}/movies/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())

@@ -4,10 +4,12 @@ import { useHistory } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
+import { API } from "../global";
+
 export function MovieList() {
   const [movies, setMovieList] = useState([]);
   const getmovies = () => {
-    fetch("https://61f2943a2219930017f50735.mockapi.io/movies", {
+    fetch(`${API}/movies`, {
       method: "GET",
     })
       .then((data) => data.json())
@@ -15,7 +17,7 @@ export function MovieList() {
   };
   useEffect(getmovies, []);
   const deleteMovie = (id) => {
-    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies/${id}`, {
+    fetch(`${API}/movies/${id}`, {
       method: "DELETE",
     })
       .then((data) => data.json())
@@ -25,14 +27,14 @@ export function MovieList() {
 
   return (
     <div className="movie-list">
-      {movies.map(({ name, poster, rating, summary, trailer, id }, index) => (
+      {movies.map(({ name, poster, rating, summary, trailer, _id }, index) => (
         <Movie
-          key={id}
+          key={_id}
           deleteButton={
             <IconButton
               aria-label="delete"
               size="medium"
-              onClick={() => deleteMovie(id)}
+              onClick={() => deleteMovie(_id)}
             >
               <DeleteIcon />
             </IconButton>
@@ -41,12 +43,12 @@ export function MovieList() {
             <IconButton
               aria-label="delete"
               size="medium"
-              onClick={() => history.push(`/movies/edit/${id}`)}
+              onClick={() => history.push(`/movies/edit/${_id}`)}
             >
               <EditIcon />
             </IconButton>
           }
-          id={id}
+          id={_id}
           name={name}
           poster={poster}
           rating={rating}

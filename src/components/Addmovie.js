@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
+import {API} from "../global";
 import * as yup from "yup";
 const addMovieformValidationSchema = yup.object({
   name: yup.string().required("Why you not fill name"),
@@ -49,7 +50,7 @@ export function Addmovie() {
   const admovie = (newMovie) => {
     // setMovieList([...movieList, newMovie]);
 
-    fetch(`https://61f2943a2219930017f50735.mockapi.io/movies`, {
+    fetch(`${API}/movies`, {
       method: "POST",
       body: JSON.stringify(newMovie),
       headers: {
