@@ -27,35 +27,37 @@ export function MovieList() {
 
   return (
     <div className="movie-list">
-      {movies.map(({ name, poster, rating, summary, trailer, _id }, index) => (
-        <Movie
-          key={_id}
-          deleteButton={
-            <IconButton
-              aria-label="delete"
-              size="medium"
-              onClick={() => deleteMovie(_id)}
-            >
-              <DeleteIcon />
-            </IconButton>
-          }
-          editButton={
-            <IconButton
-              aria-label="delete"
-              size="medium"
-              onClick={() => history.push(`/movies/edit/${_id}`)}
-            >
-              <EditIcon />
-            </IconButton>
-          }
-          id={_id}
-          name={name}
-          poster={poster}
-          rating={rating}
-          summary={summary}
-          trailer={trailer}
-        />
-      ))}
+      {movies.map(
+        ({ name, poster, rating, summary, trailer, id, _id }, index) => (
+          <Movie
+            key={_id}
+            deleteButton={
+              <IconButton
+                aria-label="delete"
+                size="medium"
+                onClick={() => deleteMovie(_id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            }
+            editButton={
+              <IconButton
+                aria-label="delete"
+                size="medium"
+                onClick={() => history.push(`/movies/edit/${_id}`)}
+              >
+                <EditIcon />
+              </IconButton>
+            }
+            id={_id}
+            name={name}
+            poster={poster}
+            rating={rating}
+            summary={summary}
+            trailer={trailer}
+          />
+        )
+      )}
     </div>
   );
 }

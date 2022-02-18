@@ -12,7 +12,7 @@ export function Movie({
   rating,
   summary,
   deleteButton,
-  _id,
+  id,
   editButton,
 }) {
   const [show, setShow] = useState(false);
@@ -50,7 +50,7 @@ export function Movie({
       <IconButton
         aria-label="delete"
         size="medium"
-        onClick={() => history.push(`/movies/${_id}`)}
+        onClick={() => history.push(`/movies/${id}`)}
       >
         <InfoIcon />
       </IconButton>
